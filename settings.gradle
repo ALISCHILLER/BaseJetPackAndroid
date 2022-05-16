@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "BaseJetPackAndroid"
 include ':app'
 include ':databindingsection1'
+include ':livedata_section1'
