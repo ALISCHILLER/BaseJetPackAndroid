@@ -16,3 +16,4 @@ rootProject.name = "BaseJetPackAndroid"
 include ':app'
 include ':databindingsection1'
 include ':livedata_section1'
+include ':livedata_viewmodel_databinding_section1'
