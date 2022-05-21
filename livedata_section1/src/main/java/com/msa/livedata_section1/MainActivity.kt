@@ -7,6 +7,13 @@ import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.msa.livedata_section1.databinding.ActivityMainBinding
+
+/**
+ * Created by atp on 1/14/2017.
+ * صفحه لیست مشتریان
+ * edited by moji
+ */
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
     // Use the 'by viewModels()' Kotlin property delegate

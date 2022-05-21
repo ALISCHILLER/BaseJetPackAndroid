@@ -4,6 +4,11 @@ import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+/**
+ * Created by atp on 1/14/2017.
+ * صفحه لیست مشتریان
+ * edited by moji
+ */
 
 class MainViewModel:ViewModel() {
 

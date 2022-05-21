@@ -4,6 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.msa.databindingsection1.databinding.ActivityMainBinding
+/**
+ * Created by atp on 1/14/2017.
+ * صفحه لیست مشتریان
+ * edited by moji
+ */
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
