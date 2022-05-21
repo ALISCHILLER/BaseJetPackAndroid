@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/databindingsection1" />
             <option value="$PROJECT_DIR$/livedata_section1" />
             <option value="$PROJECT_DIR$/livedata_viewmodel_databinding_section1" />
+            <option value="$PROJECT_DIR$/room_database_section1" />
           </set>
         </option>
       </GradleProjectSettings>
