@@ -8,11 +8,11 @@ import com.msa.room_database_section1.databinding.ListItemBinding
 import com.msa.room_database_section1.generated.callback.OnClickListener
 import com.msa.room_database_section1.local.Person
 
-class ListAdapter(private val personList:List<Person>,
-                  private val clickListener:(Person)->Unit)
+class ListAdapter(private val clickListener:(Person)->Unit)
     :RecyclerView.Adapter<MyViewHolder>(){
 
 
+     private val  personList=ArrayList<Person>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
        val layoutInflater=LayoutInflater.from(parent.context)
         val binding:ListItemBinding=
@@ -28,6 +28,11 @@ class ListAdapter(private val personList:List<Person>,
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(personList[position],clickListener)
+    }
+
+    fun setList(persons:List<Person>){
+        personList.clear()
+        personList.addAll(persons)
     }
 }
 

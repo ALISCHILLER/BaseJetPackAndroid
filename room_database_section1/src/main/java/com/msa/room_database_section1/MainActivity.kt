@@ -24,6 +24,7 @@ import com.msa.room_database_section1.local.PersonRepository
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
     private lateinit var mainViewModel:MainViewModel
+    private lateinit var adapter:ListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=DataBindingUtil.setContentView(this,R.layout.activity_main)
@@ -34,21 +35,30 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner=this
         binding.myViewModel=mainViewModel
         initRecylerView()
+
+        mainViewModel.message.observe(this, Observer {
+            it.getContentIfNotHandled()?.let {
+                Toast.makeText(this,it,Toast.LENGTH_LONG).show()
+            }
+        })
     }
     private fun initRecylerView(){
         binding.personRecycler.layoutManager=LinearLayoutManager(this)
+        adapter = ListAdapter({personItem:Person->listItemClick(personItem)})
+        binding.personRecycler.adapter=adapter
         displayPersonList()
     }
     private fun displayPersonList(){
         mainViewModel.persons.observe(this, Observer {
-          binding.personRecycler.adapter=ListAdapter(it,{personItem:Person->listItemClick(personItem)})
+            Log.i("MainActivity", it.toString())
+            adapter.setList(it)
+            adapter.notifyDataSetChanged()
         })
     }
 
     private fun listItemClick(person: Person){
-        Toast.makeText(this,"Select Item name is ${person.username}",Toast.LENGTH_LONG).show()
+//        Toast.makeText(this,"Select Item name is ${person.username}",Toast.LENGTH_LONG).show()
         mainViewModel.initUpdateAndDelete(person)
-
     }
 
 }
