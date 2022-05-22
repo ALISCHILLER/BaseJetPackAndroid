@@ -3,10 +3,12 @@ package com.msa.room_database_section1
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.msa.room_database_section1.databinding.ActivityMainBinding
 import com.msa.room_database_section1.local.PersonDAO
 import com.msa.room_database_section1.local.PersonDataBase
@@ -29,11 +31,15 @@ class MainActivity : AppCompatActivity() {
         mainViewModel=ViewModelProvider(this,factory).get(MainViewModel::class.java)
         binding.lifecycleOwner=this
         binding.myViewModel=mainViewModel
+        initRecylerView()
+    }
+    private fun initRecylerView(){
+        binding.personRecycler.layoutManager=LinearLayoutManager(this)
         displayPersonList()
     }
     private fun displayPersonList(){
         mainViewModel.persons.observe(this, Observer {
-            Log.i("mytag",it.toString())
+          binding.personRecycler.adapter=ListAdapter(it)
         })
     }
 }

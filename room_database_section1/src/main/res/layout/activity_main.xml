@@ -70,6 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pass_text" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/personRecycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="5dp"
