@@ -14,10 +14,10 @@ data class Person(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="person_id")
-    val id:Int,
+    var id:Int,
     @ColumnInfo(name = "person_name")
-    val username:String,
+    var username:String,
     @ColumnInfo(name = "person_email")
-    val email:String
+    var email:String
 
 )

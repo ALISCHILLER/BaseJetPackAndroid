@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.msa.room_database_section1.databinding.ActivityMainBinding
+import com.msa.room_database_section1.local.Person
 import com.msa.room_database_section1.local.PersonDAO
 import com.msa.room_database_section1.local.PersonDataBase
 import com.msa.room_database_section1.local.PersonRepository
@@ -39,7 +41,14 @@ class MainActivity : AppCompatActivity() {
     }
     private fun displayPersonList(){
         mainViewModel.persons.observe(this, Observer {
-          binding.personRecycler.adapter=ListAdapter(it)
+          binding.personRecycler.adapter=ListAdapter(it,{personItem:Person->listItemClick(personItem)})
         })
     }
+
+    private fun listItemClick(person: Person){
+        Toast.makeText(this,"Select Item name is ${person.username}",Toast.LENGTH_LONG).show()
+        mainViewModel.initUpdateAndDelete(person)
+
+    }
+
 }

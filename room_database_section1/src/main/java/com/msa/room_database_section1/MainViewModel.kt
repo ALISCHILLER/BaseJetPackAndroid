@@ -11,7 +11,8 @@ import kotlinx.coroutines.launch
 class MainViewModel (private val repository: PersonRepository):ViewModel(){
 
     val persons=repository.persons
-
+    private var isUpdateOrDelete=false
+    private  lateinit var personToUpdateOrDelete:Person
     val inputName=MutableLiveData<String?>()
 
     val inputEmail=MutableLiveData<String?>()
@@ -27,14 +28,27 @@ class MainViewModel (private val repository: PersonRepository):ViewModel(){
 
 
     fun saveOrUpdate(){
-        val name:String=inputName.value!!
-        val email:String=inputEmail.value!!
-        insert(Person(0,name,email))
-        inputName.value = null
-        inputEmail.value = null
+        if (isUpdateOrDelete){
+            personToUpdateOrDelete.username=inputName.value!!
+            personToUpdateOrDelete.email=inputEmail.value!!
+
+            update(personToUpdateOrDelete)
+        }else{
+            val name:String=inputName.value!!
+            val email:String=inputEmail.value!!
+            insert(Person(0,name,email))
+            inputName.value = null
+            inputEmail.value = null
+        }
+
     }
     fun clearOrAllDelete(){
-        clearAll()
+        if (isUpdateOrDelete){
+            delete(personToUpdateOrDelete)
+        }else{
+            clearAll()
+        }
+
     }
 
     fun insert(person: Person)=viewModelScope.launch {
@@ -43,14 +57,33 @@ class MainViewModel (private val repository: PersonRepository):ViewModel(){
 
     fun update(person: Person)=viewModelScope.launch {
         repository.update(person)
+        inputName.value=null
+        inputEmail.value=null
+        isUpdateOrDelete=false
+        saveorUpdateButtonText.value="Save"
+        clearAllOrDeleteButtonText.value="Clear All"
     }
 
     fun delete(person: Person)=viewModelScope.launch {
         repository.delete(person)
+        inputName.value=null
+        inputEmail.value=null
+        isUpdateOrDelete=false
+        saveorUpdateButtonText.value="Save"
+        clearAllOrDeleteButtonText.value="Clear All"
     }
     fun clearAll()=viewModelScope.launch {
         repository.deleteAll()
     }
 
+    fun initUpdateAndDelete(person: Person) {
+        inputName.value=person.username
+        inputEmail.value=person.email
+        isUpdateOrDelete=true
+        personToUpdateOrDelete=person
+        saveorUpdateButtonText.value="Update"
+        clearAllOrDeleteButtonText.value="Delete"
+
+    }
 
 }
