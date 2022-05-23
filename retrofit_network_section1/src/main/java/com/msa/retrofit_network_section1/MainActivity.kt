@@ -29,8 +29,12 @@ class MainActivity : AppCompatActivity() {
         val retService=RetrofitInstance.getRetrofitInstance()
             .create(AlbumService::class.java)
 
+        /**Path Parameters*/
         getRequestWithPathParameters()
+        /**get all parameters &Query Parameters */
         getRequestWithQueryParameters()
+        /**Post Parameters  uploadAlbum*/
+       // uploadAlbum()
 
     }
     /**Path Parameters*/
@@ -69,5 +73,22 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    /**Post Parameters  uploadAlbum*/
+     private fun uploadAlbum(){
+         val album=AlbumsItem(0,"My Titile",3)
+         val postResponse:LiveData<Response<AlbumsItem>> = liveData {
+             val response=retService.uploadAlbum(album)
+             emit(response)
+         }
+         postResponse.observe(this, Observer {
+             val receivedAlbumsItem =  it.body()
+             val result:String=" "+"Album Title: ${receivedAlbumsItem?.title}"+"\n"+
+                     " "+"Album id:    ${receivedAlbumsItem?.id}"+"\n"+
+                     " "+"UserId:${receivedAlbumsItem?.userId}"+"\n\n\n"
+
+             titile_text.append(result)
+         })
     }
 }
