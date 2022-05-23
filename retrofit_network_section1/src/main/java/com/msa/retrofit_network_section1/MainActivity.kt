@@ -20,15 +20,21 @@ import retrofit2.Response
  */
 class MainActivity : AppCompatActivity() {
     private lateinit var retService:AlbumService
+    private lateinit var titile_text:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val titile_text:TextView=findViewById(R.id.titile_text)
+        titile_text=findViewById(R.id.titile_text)
 
         val retService=RetrofitInstance.getRetrofitInstance()
             .create(AlbumService::class.java)
 
+        getRequestWithPathParameters()
+        getRequestWithQueryParameters()
 
+    }
+    /**Path Parameters*/
+    private fun getRequestWithPathParameters(){
         /**Path Parameters*/
         val pathResponse:LiveData<Response<AlbumsItem>> = liveData{
             val response=retService.getAlbum(23)
@@ -38,6 +44,10 @@ class MainActivity : AppCompatActivity() {
             val title=it.body()?.title
             Toast.makeText(applicationContext, title, Toast.LENGTH_SHORT).show()
         })
+    }
+
+
+    private fun getRequestWithQueryParameters(){
         val responseLiveData:LiveData<Response<Albums>> = liveData {
             /**get all parameters */
             ///val  response=retService.getAlbums()
@@ -52,16 +62,12 @@ class MainActivity : AppCompatActivity() {
                     val albumsItem=albumslist.next()
                     Log.i("MainActivity",  albumsItem.title)
                     val result:String=" "+"Album Title: ${albumsItem.title}"+"\n"+
-                                      " "+"Album id:    ${albumsItem.id}"+"\n"+
-                                      " "+"UserId:${albumsItem.userId}"+"\n\n\n"
+                            " "+"Album id:    ${albumsItem.id}"+"\n"+
+                            " "+"UserId:${albumsItem.userId}"+"\n\n\n"
 
                     titile_text.append(result)
                 }
             }
         })
-    }
-
-    private fun getRequestWithQueryParameters(){
-        
     }
 }
