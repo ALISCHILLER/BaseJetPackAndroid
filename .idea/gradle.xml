@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/notifications_section1" />
             <option value="$PROJECT_DIR$/retrofit_network_section1" />
             <option value="$PROJECT_DIR$/room_database_section1" />
+            <option value="$PROJECT_DIR$/workmanager_section1" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         titile_text=findViewById(R.id.titile_text)
 
-        val retService=RetrofitInstance.getRetrofitInstance()
+      retService=RetrofitInstance.getRetrofitInstance()
             .create(AlbumService::class.java)
 
         /**Path Parameters*/
@@ -35,6 +35,9 @@ class MainActivity : AppCompatActivity() {
         getRequestWithQueryParameters()
         /**Post Parameters  uploadAlbum*/
        // uploadAlbum()
+
+
+
 
     }
     /**Path Parameters*/
