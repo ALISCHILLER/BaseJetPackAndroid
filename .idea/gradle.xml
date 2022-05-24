@@ -11,12 +11,14 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/dagger_hilt_section1" />
             <option value="$PROJECT_DIR$/databindingsection1" />
             <option value="$PROJECT_DIR$/livedata_section1" />
             <option value="$PROJECT_DIR$/livedata_viewmodel_databinding_section1" />
             <option value="$PROJECT_DIR$/notifications_section1" />
             <option value="$PROJECT_DIR$/retrofit_network_section1" />
             <option value="$PROJECT_DIR$/room_database_section1" />
+            <option value="$PROJECT_DIR$/unit_testing_fundamentals_section1" />
             <option value="$PROJECT_DIR$/workmanager_section1" />
           </set>
         </option>
